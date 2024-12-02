@@ -1,0 +1,17 @@
+name: nats-cluster
+prefix: ""
+topology:
+  nodes:
+    nats:
+      kind: linux
+      image: nats:latest
+      ports:
+        - 4222:4222
+    # r1:
+    #   kind: ceos
+    #   image: ceos:4.32.1F
+    # runner:
+    #   kind: linux
+    #   image: nats-config:latest
+    #   env:
+    #     DEVICE: r1
