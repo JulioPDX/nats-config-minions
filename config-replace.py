@@ -1,15 +1,16 @@
 import asyncio
 import os
+
 import nats
 from napalm import get_network_driver
 
-
+# Load DEVICE environment variable to build device construct
 DEVICE = os.environ["DEVICE"]
 
 device = {
-    "hostname": DEVICE,  # IP address of the Arista EOS device
-    "username": "admin",  # SSH username
-    "password": "admin",  # SSH password
+    "hostname": DEVICE,
+    "username": "admin",
+    "password": "admin",
 }
 
 

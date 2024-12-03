@@ -1,0 +1,41 @@
+---
+all:
+  children:
+    LAB:
+      children:
+        FABRIC:
+          children:
+            SPINES:
+              vars:
+                type: spine
+              hosts:
+                spine1:
+                  ansible_host: 172.20.20.11
+            LEAFS:
+              vars:
+                type: l3leaf
+              hosts:
+                leaf1:
+                  ansible_host: 172.20.20.12
+                leaf2:
+                  ansible_host: 172.20.20.13
+        TENANTS_NETWORKS:
+          children:
+            ATD_LEAFS:
+        SERVERS:
+          children:
+            ATD_LEAFS:
+
+  vars:
+    ansible_user: admin
+    ansible_password: admin
+    ansible_network_os: arista.eos.eos
+    # Configure privilege escalation
+    ansible_become: true
+    ansible_become_method: enable
+    # HTTPAPI configuration
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_python_interpreter: $(which python3)

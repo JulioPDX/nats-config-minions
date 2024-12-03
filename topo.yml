@@ -1,5 +1,10 @@
 name: nats-cluster
 prefix: ""
+
+mgmt:
+  network: statics
+  ipv4-subnet: 172.20.20.0/24
+
 topology:
   nodes:
     nats:
@@ -7,11 +12,33 @@ topology:
       image: nats:latest
       ports:
         - 4222:4222
-    # r1:
-    #   kind: ceos
-    #   image: ceos:4.32.1F
-    # runner:
-    #   kind: linux
-    #   image: nats-config:latest
-    #   env:
-    #     DEVICE: r1
+    runner1:
+      kind: linux
+      image: nats-config:latest
+      env:
+        DEVICE: spine1
+    runner2:
+      kind: linux
+      image: nats-config:latest
+      env:
+        DEVICE: leaf1
+    runner3:
+      kind: linux
+      image: nats-config:latest
+      env:
+        DEVICE: leaf2
+    spine1:
+      kind: ceos
+      image: ceos:4.32.1F
+      mgmt-ipv4: 172.20.20.11
+    leaf1:
+      kind: ceos
+      image: ceos:4.32.1F
+      mgmt-ipv4: 172.20.20.12
+    leaf2:
+      kind: ceos
+      image: ceos:4.32.1F
+      mgmt-ipv4: 172.20.20.13
+  links:
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
