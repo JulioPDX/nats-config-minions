@@ -16,8 +16,8 @@ async def watch_directory(nc, path):
 
 
 async def main():
-    nc = await nats.connect("nats://localhost:4222")
-    await watch_directory(nc, "deployment/intended/configs")
+    nc = await nats.connect("nats://nats:4222")
+    await watch_directory(nc, "/tmp/configs")
     await asyncio.Event().wait()
 
 

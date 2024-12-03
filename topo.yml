@@ -12,6 +12,12 @@ topology:
       image: nats:latest
       ports:
         - 4222:4222
+    watcher:
+      kind: linux
+      image: nats-watcher:latest
+      binds:
+        - deployment/intended/:/tmp/
+        - watch.py:/app/watch.py:ro
     runner1:
       kind: linux
       image: nats-config:latest
