@@ -9,27 +9,22 @@ If you'd like to run this project:
 - Python3 installed
 - Containerlab installed
 
-## Build the runner images locally
+## Build the runner image
 
 ```shell
 docker build -t nats-config:latest .
+```
+
+## Build the watcher image
+
+```shell
+docker build -t nats-watcher:latest . -f Watchfile
 ```
 
 ## Run the Clab topology
 
 ```shell
 sudo clab deploy -t topo.yml
-```
-
-## Run the watch service locally
-
-From you local machine:
-
-```shell
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
-python3 watch.py
 ```
 
 ## Make changes and watch the updates happen
